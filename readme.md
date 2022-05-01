@@ -1,0 +1,1 @@
+itterate over all objects and generate new json files for each object

@@ -1,0 +1,11 @@
+{
+  "name": "json-splitter",
+  "version": "1.0.0",
+  "description": "split json object into new objects",
+  "main": "splitter.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "MTL",
+  "license": "ISC"
+}
