@@ -13,13 +13,15 @@ fs.readFile(fileName, 'utf8', function (err, data) {
     var dir = 'newData/'
     // console.log(newData)
 
-    for (const [key, value] of Object.entries(newData)) {
+    for (const symbol of Object.keys(newData)) {
         // console.log(key);
-        var stockName = value
-        console.log('value', value)
-        console.log('key', key)
+        var symbolValue = newData[symbol];
+        console.log("symbols", symbol, symbolValue)
+        var stockName = symbolValue
+        // console.log('value', value)
+        // console.log('key', key)
 
-        fs.writeFile(dir + `${stockName}`, value, err => {
+        fs.writeFile(dir + `${stockName}`, symbol, err => {
             if (err) {
                 console.log(err)
             }
