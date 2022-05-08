@@ -6,29 +6,23 @@ const dir = 'newData/'
 fs.readFile(fileName, 'utf8', function (err, data) {
 
     var newData = JSON.parse(data)
-    var symb = [];
+    var stockSymbol = [];
 
+    console.log(newData[1])
+
+    // Push the symbols for creating JSON files
     for (const [key, value] of Object.entries(newData)) {
 
-        symb.push(value.instrument_info.symbol);
-        // console.log(typeof value)
+        stockSymbol.push(value.instrument_info.symbol);
 
     }
-    console.log('symbols', symb)
-    console.log('symb is:', typeof symb)
 
-    // const symbString = JSON.stringify(symb)
+    for (let i = 0; i < stockSymbol.length; i++) {
 
-    // console.log(symbString)
-    // console.log('symbString is:', typeof symbString)
+        let stockName = JSON.stringify(stockSymbol[i]).replace(/(^"|\"$)/mg, '')
+        let someData = JSON.stringify(newData[i], null, 2)
 
-    for (let i = 0; i < symb.length; i++) {
-
-        // Get the string value of pos 1, 2, etc...
-        let stockName = JSON.stringify(symb[i]).replace(/(^"|\"$)/mg, '')
-        let someData = 'Some data';
-
-        console.log('stockName:', stockName, 'Type:', typeof stockName)
+        console.log('Wrote data for:', stockName, '|', 'Stocks to write:', i+1, 'of', stockSymbol.length)
 
         fs.writeFile(dir + `${stockName}.json`, someData, err => {
             if (err) {
