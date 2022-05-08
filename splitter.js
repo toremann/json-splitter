@@ -1,28 +1,40 @@
 const fs = require('fs');
 const fileName = 'data/data.json';
+const dir = 'newData/'
 
 // read the file
 fs.readFile(fileName, 'utf8', function (err, data) {
 
-    // console.log(data.instrument_info.symbol)
-    var newData = JSON.parse(data);
-
-    // Its object :(
-    console.log(typeof newData)
-
-    var dir = 'newData/'
-    // console.log(newData)
+    var newData = JSON.parse(data)
+    var symb = [];
 
     for (const [key, value] of Object.entries(newData)) {
-        // console.log(key);
-        var stockName = value
-        console.log('value', value)
-        console.log('key', key)
 
-        fs.writeFile(dir + `${stockName}`, value, err => {
+        symb.push(value.instrument_info.symbol);
+        // console.log(typeof value)
+
+    }
+    console.log('symbols', symb)
+    console.log('symb is:', typeof symb)
+
+    // const symbString = JSON.stringify(symb)
+
+    // console.log(symbString)
+    // console.log('symbString is:', typeof symbString)
+
+    for (let i = 0; i < symb.length; i++) {
+
+        // Get the string value of pos 1, 2, etc...
+        let stockName = JSON.stringify(symb[i]).replace(/(^"|\"$)/mg, '')
+        let someData = 'Some data';
+
+        console.log('stockName:', stockName, 'Type:', typeof stockName)
+
+        fs.writeFile(dir + `${stockName}.json`, someData, err => {
             if (err) {
                 console.log(err)
             }
         })
     }
  })
+
